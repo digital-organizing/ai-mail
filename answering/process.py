@@ -93,8 +93,6 @@ def write_answer(
 ) -> Tuple[str, str, List[Hit]]:
     client = Client(node.lepton_url)
 
-    assert node.realm is not None
-
     results = []
 
     if node.realm:
