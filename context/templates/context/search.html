@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5  static %}
+
+{% block title %}
+Suche | {{realm.name}}
+{% endblock %}
+
+{% block content %}
+<h2>Suche: {{realm.name}}</h2>
+
+<form method="get" class="row row-cols-lg-auto g-3 align-items-center">
+  {% bootstrap_form form layout='inline' %}
+  {% bootstrap_button button_type="submit" content="Los" %}
+</form>
+{% if form.cleaned_data.query %}
+<h2>
+Resultate für: {{form.cleaned_data.query}}
+</h2>
+<ul>
+{% for result in results %}
+<li title="{{result.meta}}">{{result.sentence}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,92 @@
+[project]
+name = "ai-mails"
+version = "0.0.1"
+dependencies = [
+  "BeautifulSoup4",
+  "boto3",
+  "cachetools",
+  "celery[redis]",
+  "django",
+  "django-celery-beat",
+  "django-celery-results",
+  "django-cors-headers",
+  "django-environ",
+  "django-import-export",
+  "django-model-utils",
+  "django-sesame[ua]",
+  "django-storages",
+  "djangorestframework",
+  "django-json-widget",
+  "gunicorn",
+  "leptonai",
+  "lxml",
+  "markdown",
+  "more-itertools",
+  "numpy",
+  "numba",
+  "openpyxl",
+  "django-bootstrap5",
+  "pandas",
+  "psutil",
+  "psycopg2-binary",
+  "pymemcache",
+  "pymilvus",
+  "ratelimit",
+  "redis",
+  "requests",
+  "Scrapy",
+  "tika",
+  "sentry-sdk",
+  "tablib",
+  "uvicorn[standard]",
+  "whitenoise[brotli]",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+dev = ["isort", "pytest", "rope", "toml", "yapf", "django-types"]
+
+
+[tool.pylsp-mypy]
+enabled = true
+live_mode = false
+strict = true
+dmypy = true
+
+
+[tool.pyright]
+
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+
+[tool.flake8]
+max-line-length = 120
+exclude = ".tox,.git,*/migrations/*,*/static/CACHE/*,docs,node_modules,venv"
+
+[tool.yapf]
+based_on_style = "google"
+column_limit = 120
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+
+
+[tool.pycodestyle]
+max-line-length = 120
+exclude = ".tox,.git,*/migrations/*,*/static/CACHE/*,docs,node_modules,venv"
+
+
+[tool.ruff]
+line-length = 120
