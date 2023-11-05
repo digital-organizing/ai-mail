@@ -5,7 +5,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/home/app/web/
+      #      - .:/home/app/web/
       - ./cache/:/home/app/.cache
     ports:
       - 8000:8000
@@ -20,7 +20,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - .:/home/app/web/
+      #      - .:/home/app/web/
       - ./cache/:/home/app/.cache
     environment:
       - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$SQL_HOST/$POSTGRES_DB
@@ -31,7 +31,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - .:/home/app/web/
+      #- .:/home/app/web/
       - ./cache/:/home/app/.cache
     environment:
       - DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$SQL_HOST/$POSTGRES_DB
@@ -40,7 +40,7 @@ services:
     build: .
     command: python manage.py launch 0.0.0.0
     volumes:
-      - .:/home/app/web/
+      #- .:/home/app/web/
       - model_storage:/home/app/store
       - ./cache/:/home/app/.cache
     env_file:

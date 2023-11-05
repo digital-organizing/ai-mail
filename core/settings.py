@@ -30,6 +30,10 @@ DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_HOSTS", default=[])
+
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+
 ADMINS = [x.split(":") for x in env.list("DJANGO_ADMINS", default=[])]
 # Application definition
 
@@ -53,7 +57,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -158,6 +164,7 @@ SERVER_EMAIL = env("SERVER_EMAIL", default="root@localhost")
 
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="mail@localhost")
 
+
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 # Run behind proxy for tls
@@ -175,7 +182,6 @@ REDIS_URL = CELERY_BROKER_URL
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_CACHE_BACKEND = "django-cache"
 
-CORS_ORIGIN_ALLOW_ALL = DEBUG
 
 API_HOST = env("API_HOST", default="ml_api")
 API_PORT = env.int("API_PORT", default=8081)
