@@ -4,13 +4,13 @@
 {% block title %}{{inbox.name}}{% endblock %}
 
 {% block content %}
-{% for message in page %}
 <h2> {{inbox.name}}: Fragen & Antworten</h2>
+{% for message in page %}
 <div class="question-group">
   <h3>Frage</h3>
   <p class="message question">{{message.content}}</p>
-  <h4>Antwort</h4>
   {% for answer in message.outputmessage_set.all %}
+  <h4>Antwort ({{answer.task.name}})</h4>
   <p class="message answer">{{answer.content}}</p>
   {% empty %}
   <p>Fehler bei der Beantwortung</p>
