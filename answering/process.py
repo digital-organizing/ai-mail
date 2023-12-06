@@ -1,6 +1,7 @@
 import traceback
 from typing import List, Tuple
 
+import openai
 import requests
 from django.conf import settings
 from django.template import Context, Template
@@ -91,8 +92,6 @@ def classify_message(input: InputMessage) -> TaskTemplate:
 def write_answer(
     node: TaskTemplate, subject: str, content: str
 ) -> Tuple[str, str, List[Hit]]:
-    client = Client(node.lepton_url)
-
     results = []
 
     if node.realm:
@@ -111,9 +110,44 @@ def write_answer(
             }
         )
     )
-    message = client.run(inputs=prompt, return_full_text=False, **node.model_config)
+
+    if node.use_openai:
+        message = generate_text_openai(prompt, content, node)
+    else:
+        message = generate_text(prompt, node)
 
     return subject, message.strip(), results
+
+
+def generate_text(prompt, node):
+    client = Client(node.lepton_url)
+    message = client.run(inputs=prompt, return_full_text=False, **node.model_config)
+
+    return message
+
+
+def generate_text_openai(prompt, message, node: TaskTemplate) -> str:
+    config = node.model_config
+
+    client = openai.OpenAI()
+
+    return (
+        client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": prompt,
+                },
+                {
+                    "role": "user",
+                    "content": message,
+                },
+            ],
+            **config,
+        )
+        .choices[0]
+        .message.content
+    ) or "Error"
 
 
 def train_classifier(inbox: Inbox):

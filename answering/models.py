@@ -55,6 +55,8 @@ class TaskTemplate(models.Model):
     lepton_url = models.CharField(max_length=1000, blank=True)
     model_config = models.JSONField(default=dict)
 
+    use_openai = models.BooleanField(default=False)
+
     prompt_template = models.TextField(blank=True)
 
     default_answer = models.TextField(blank=True)
