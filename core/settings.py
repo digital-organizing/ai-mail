@@ -190,3 +190,6 @@ API_SECRET = env("API_SECRET", default="secret")
 SBERT_MODEL = env("SBERT_MODEL", default="paraphrase-multilingual-MiniLM-L12-v2")
 
 CRAWL_DIR = BASE_DIR / "crawls"
+
+
+OPENAI_API_KEY = env("OPENAI_API_KEY", default="")

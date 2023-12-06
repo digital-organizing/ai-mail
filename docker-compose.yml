@@ -5,7 +5,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      #      - .:/home/app/web/
+      - .:/home/app/web/
       - ./cache/:/home/app/.cache
     ports:
       - 8000:8000
