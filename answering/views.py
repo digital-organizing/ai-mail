@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -91,3 +92,24 @@ def task_template_view(request, pk: int):
 
 def index_view(request):
     return render(request, "index.html", {})
+
+
+def message_overview(request, pk):
+    inbox = Inbox.objects.get(pk=pk)
+    group = inbox.group
+
+    if not request.user.groups.filter(pk=group.pk).exists():
+        raise PermissionDenied("You don't have access to this task")
+    messages = InputMessage.objects.filter(inbox=inbox)
+
+    page_number = request.GET.get("page", 1)
+    p = Paginator(messages, 20)
+
+    return render(
+        request,
+        "answering/messages.html",
+        {
+            "page": p.get_page(page_number),
+            "inbox": inbox,
+        },
+    )
