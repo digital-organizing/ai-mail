@@ -213,3 +213,5 @@ AWS_S3_ENDPOINT_URL = env("S3_ENDPOINT_URL", default="")
 AWS_S3_CUSTOM_DOMAIN = env("S3_CUSTOM_DOMAIN", default="")
 
 AWS_QUERYSTRING_AUTH = False
+
+OPENAI_API_KEY = env("OPENAI_API_KEY", default="")

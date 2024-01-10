@@ -63,6 +63,8 @@ class TaskTemplate(models.Model):
 
     model_config = models.JSONField(default=dict)
 
+    use_openai = models.BooleanField(default=False)
+
     prompt_template = models.TextField(blank=True)
 
     default_answer = models.TextField(blank=True)
