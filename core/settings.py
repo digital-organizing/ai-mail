@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "whitenoise.runserver_nostatic",
+    "rest_framework",
+    "rest_framework.authtoken",
     "django_celery_results",
     "django_celery_beat",
     "django_json_widget",

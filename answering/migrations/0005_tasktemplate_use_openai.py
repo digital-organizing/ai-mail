@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('answering', '0004_tasktemplate_default_answer'),
+        ("answering", "0004_tasktemplate_default_answer"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tasktemplate',
-            name='use_openai',
+            model_name="tasktemplate",
+            name="use_openai",
             field=models.BooleanField(default=True),
         ),
     ]
