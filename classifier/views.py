@@ -1,12 +1,11 @@
 import io
-import json
 
 import pandas as pd
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponseBadRequest
 from django.http.response import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 
 from classifier.classify import predict_class
 from classifier.models import Classifier, Sample
@@ -17,11 +16,11 @@ def classification_view(request, id):
     return render(request, "classifier/classification.html", {})
 
 
-@csrf_exempt
+@api_view(["GET", "POST"])
 @login_required
 def classify(request: HttpRequest, pk):
     if request.method == "POST":
-        texts = json.loads(request.body)["texts"]
+        texts = request.data["texts"]
 
         result = predict_class(Classifier.objects.get(uuid=pk), texts)
         return JsonResponse({"result": list(result)})

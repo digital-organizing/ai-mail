@@ -21,6 +21,11 @@
     document.querySelector('#sendText').addEventListener('click', () => {
       fetch('', {
         method: 'post',
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{csrf_token}}",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
         body: JSON.stringify({
           'texts': [document.querySelector('#text').value]
         })
