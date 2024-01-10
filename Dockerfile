@@ -10,7 +10,8 @@ RUN apt-get update && \
   netcat-traditional gettext build-essential gcc
 
 # install dependencies
-RUN pip install --no-cache --upgrade pip
+
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install --no-cache --upgrade pip
 COPY ./pyproject.toml .
 RUN --mount=type=cache,target=/root/.cache pip install .
 
@@ -29,7 +30,6 @@ COPY --chown=app:app . $APP_HOME
 
 RUN chown -R app:app /static ${APP_HOME}
 
-RUN python -c "import nltk; nltk.download('punkt')"
 # change to the app user
 USER app
 
