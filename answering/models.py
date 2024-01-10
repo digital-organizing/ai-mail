@@ -22,6 +22,11 @@ class Inbox(models.Model):
         return self.name
 
 
+class OpenaAIAuth(models.Model):
+    group = models.ForeignKey(Group, models.CASCADE)
+    api_key = models.CharField(max_length=500)
+
+
 class OutputWebhook(models.Model):
     class Auth(models.TextChoices):
         DIGEST = "digest", _("Digest")
@@ -53,6 +58,9 @@ class TaskTemplate(models.Model):
     generate_answer = models.BooleanField()
 
     lepton_url = models.CharField(max_length=1000, blank=True)
+
+    use_openai = models.BooleanField(default=False)
+
     model_config = models.JSONField(default=dict)
 
     prompt_template = models.TextField(blank=True)

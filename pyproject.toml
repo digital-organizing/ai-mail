@@ -18,7 +18,6 @@ dependencies = [
   "djangorestframework",
   "django-json-widget",
   "gunicorn",
-  "leptonai",
   "lxml",
   "markdown",
   "more-itertools",
@@ -40,11 +39,17 @@ dependencies = [
   "tablib",
   "uvicorn[standard]",
   "whitenoise[brotli]",
+  "document-embedding",
+  "laser_encoders",
+  "fairseq",
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
 
 [project.optional-dependencies]
 dev = ["isort", "pytest", "rope", "toml", "yapf", "django-types"]

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <textarea id="text">
+
+  </textarea>
+
+  <button type="button" id="sendText">Senden</button>
+
+  <span id="result"></span>
+  <script>
+
+    document.querySelector('#sendText').addEventListener('click', () => {
+      fetch('', {
+        method: 'post',
+        body: JSON.stringify({
+          'texts': [document.querySelector('#text').value]
+        })
+      }).then((response) => response.json()).then(data => {
+        console.log(data['result'][0]);
+      });
+    })
+
+  </script>
+</body>
+
+</html>

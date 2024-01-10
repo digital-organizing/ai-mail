@@ -14,31 +14,6 @@ class Realm(TimeStampedModel):
 
     is_public = models.BooleanField()
 
-    embedding_model = models.CharField(
-        max_length=130,
-        choices=(
-            (
-                "distiluse-base-multilingual-cased-v1",
-                "distiluse-base-multilingual-cased-v1",
-            ),
-            (
-                "paraphrase-multilingual-MiniLM-L12-v2",
-                "paraphrase-multilingual-MiniLM-L12-v2",
-            ),
-            (
-                "distiluse-base-multilingual-cased-v2",
-                "distiluse-base-multilingual-cased-v2",
-            ),
-            (
-                "paraphrase-multilingual-mpnet-base-v2",
-                "paraphrase-multilingual-mpnet-base-v2",
-            ),
-        ),
-        default="paraphrase-multilingual-MiniLM-L12-v2",
-    )
-    embedding_dimension = models.IntegerField(default=384)
-    embedding_seq_length = models.IntegerField(default=200)
-
     group = models.ForeignKey(Group, models.CASCADE)
 
     document_set: models.QuerySet["Document"]

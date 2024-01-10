@@ -43,3 +43,6 @@ class InboxAdmin(admin.ModelAdmin):
         # fields.JSONField: {'widget': JSONEditorWidget}, # if django < 3.1
         models.JSONField: {"widget": JSONEditorWidget},
     }
+
+    def train_classifier(self, request, queryset):
+        pass

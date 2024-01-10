@@ -190,3 +190,26 @@ API_SECRET = env("API_SECRET", default="secret")
 SBERT_MODEL = env("SBERT_MODEL", default="paraphrase-multilingual-MiniLM-L12-v2")
 
 CRAWL_DIR = BASE_DIR / "crawls"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ]
+}
+
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+AWS_S3_ACCESS_KEY_ID = env("S3_ACCESS_KEY_ID", default="")
+AWS_S3_SECRET_ACCESS_KEY = env("S3_SECRET_ACCESS_KEY", default="")
+
+AWS_STORAGE_BUCKET_NAME = env("S3_BUCKET_NAME", default="")
+AWS_S3_REGION_NAME = env("S3_REGION_NAME", default="")
+AWS_S3_ENDPOINT_URL = env("S3_ENDPOINT_URL", default="")
+
+AWS_S3_CUSTOM_DOMAIN = env("S3_CUSTOM_DOMAIN", default="")
+
+AWS_QUERYSTRING_AUTH = False

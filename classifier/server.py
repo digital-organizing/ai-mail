@@ -5,6 +5,7 @@ import traceback
 from functools import partial
 
 import joblib
+from document_embedding.pert import PertDocumentEmbedding
 from sentence_transformers import SentenceTransformer
 from sklearn.svm import SVC
 
@@ -29,7 +30,8 @@ def _store_classifiers(path, classifiers):
 
 class Server:
     def __init__(self, sbert_model, path, secret, port=9090, host="0.0.0.0") -> None:
-        self.sbert_model = SentenceTransformer(sbert_model)
+        model = SentenceTransformer(sbert_model)
+        self.sbert_model = PertDocumentEmbedding(model)
 
         self.path = path
 
@@ -103,10 +105,8 @@ class Server:
         _store_classifiers(self.path, self.classifiers)
 
     def predict_class(self, key, values):
-        print("Predicting...")
         embedding = self.get_embedding(values)
         result = self.classifiers[key].predict(embedding)
-        print(result)
         return result
 
     def get_embedding(self, sentence):

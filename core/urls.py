@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("answering.urls")),
     path("context/", include("context.urls")),
+    path("classifier/", include("classifier.urls")),
 ]

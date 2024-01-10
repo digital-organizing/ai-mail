@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <form method="post" enctype="multipart/form-data">
+    <label>Label-Spalte</label>
+    <input type="text" name="label" />
+    <label>Inhalt-Spalte</label>
+    <input type="text" name="content" />
+    <label>File-Type</label>
+    <input type="text" name="ftype" value="excel" />
+
+    <input type="file" name="file" />
+    {% csrf_token %}
+    <button type="submit">
+      Absenden
+    </button>
+  </form>
+
+</body>
+
+</html>

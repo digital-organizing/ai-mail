@@ -1,38 +1,24 @@
-import itertools
 from typing import Iterable, List
 
-from sentence_transformers import SentenceTransformer
+from django.conf import settings
 
-from context.services import split_sentences, split_sentences_pos
+from classifier.client import Client
 
 
 class EmbeddingModel:
-    def __init__(self, model, language) -> None:
-        self.model = SentenceTransformer(model)
+    def __init__(self, language) -> None:
+        self.client = Client(settings.API_HOST, settings.API_HOST, settings.API_SECRET)
+        self.client.connect()
         self.language = language
 
     def get_embedding(self, sentence):
-        return self.model.encode(sentence)
+        return self.client.get_embedding(sentence)
 
     def batch_get_embeddings(self, sentences: List[str]):
-        return self.model.encode(sentences)
+        return self.client.get_embedding(sentences)
 
     def get_document_embeddings(self, document: str):
-        sentences = split_sentences(document, self.language)
-        return self.batch_get_embeddings(sentences)
+        return self.get_embedding(document)
 
     def batch_get_document_embeddings(self, documents: Iterable[str]):
-        splits = [
-            split_sentences_pos(document, self.language) for document in documents
-        ]
-
-        flat_embeddings = self.batch_get_embeddings(
-            list(itertools.chain(*[split[1] for split in splits]))
-        )
-
-        idx = 0
-        for split in splits:
-            positions, sentences = split
-            embeddings = flat_embeddings[idx : idx + len(sentences)]
-            yield (positions, sentences, embeddings)
-            idx += len(sentences)
+        return self.client.get_embedding(documents)

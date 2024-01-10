@@ -5,7 +5,6 @@ import requests
 from django.conf import settings
 from django.template import Context, Template
 from django.utils import timezone
-from leptonai.client import Client
 from pymilvus import Hit
 
 from answering.auth import get_auth
