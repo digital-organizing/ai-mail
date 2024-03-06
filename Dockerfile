@@ -21,14 +21,14 @@ RUN useradd -ms /bin/bash app
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/web
 
-RUN mkdir -p $APP_HOME/.cache ${APP_HOME}/nltk_data $APP_HOME/store /static
+RUN mkdir -p $APP_HOME/.cache ${APP_HOME}/nltk_data $APP_HOME/store /static /media
 
 WORKDIR $APP_HOME
 
 # copy project
 COPY --chown=app:app . $APP_HOME
 
-RUN chown -R app:app /static ${APP_HOME}
+RUN chown -R app:app /static /media ${APP_HOME}
 
 # change to the app user
 USER app

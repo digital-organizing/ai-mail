@@ -38,9 +38,7 @@ ADMINS = [x.split(":") for x in env.list("DJANGO_ADMINS", default=[])]
 # Application definition
 
 INSTALLED_APPS = [
-    "answering",
     "classifier",
-    "context",
     "corsheaders",
     "django_bootstrap5",
     "django.contrib.admin",
@@ -202,6 +200,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+MEDIA_ROOT = "/media/"
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 

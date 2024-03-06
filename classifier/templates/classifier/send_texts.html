@@ -30,7 +30,8 @@
           'texts': [document.querySelector('#text').value]
         })
       }).then((response) => response.json()).then(data => {
-        document.querySelector('#result').innerText = data['result'][0]
+        const result = data['result'][0]
+        document.querySelector('#result').innerText = `${result.slug}: ${result.score}`
       });
     })
 

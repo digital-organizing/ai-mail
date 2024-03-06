@@ -13,13 +13,15 @@ class Classifier(models.Model):
 
     language = models.CharField(max_length=20)
 
+    min_threshold = models.FloatField(default=0.0)
+
     def __str__(self):
         return self.name
 
 
 class Sample(models.Model):
     content = models.TextField()
-    label = models.CharField()
+    label = models.CharField(max_length=500)
     classifier = models.ForeignKey(Classifier, models.CASCADE)
 
     def __str__(self):

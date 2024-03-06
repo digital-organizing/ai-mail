@@ -4,8 +4,8 @@ import os
 import tika
 from celery.app import shared_task
 from django.conf import settings
+from django.db import transaction
 from django.utils import timezone
-from model_utils.models import transaction
 from scrapy.crawler import CrawlerProcess
 
 from context.crawler import ParagraphsSpider

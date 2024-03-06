@@ -1,6 +1,6 @@
 from typing import List, cast
 
-from model_utils.models import transaction
+from django.db import transaction
 from pymilvus import (
     Collection,
     CollectionSchema,

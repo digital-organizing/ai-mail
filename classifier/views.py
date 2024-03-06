@@ -7,7 +7,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 
-from classifier.classify import predict_class
+from classifier.classify import predict_class, predict_class_proba
 from classifier.models import Classifier, Sample
 
 
@@ -21,9 +21,13 @@ def classification_view(request, id):
 def classify(request: HttpRequest, pk):
     if request.method == "POST":
         texts = request.data["texts"]
+        print(texts)
 
-        result = predict_class(Classifier.objects.get(uuid=pk), texts)
-        return JsonResponse({"result": list(result)})
+        if request.GET.get("probas", False):
+            result = predict_class_proba(Classifier.objects.get(uuid=pk), texts)
+        else:
+            result = predict_class(Classifier.objects.get(uuid=pk), texts)
+        return JsonResponse({"result": result})
     return render(request, "classifier/send_texts.html")
 
 
